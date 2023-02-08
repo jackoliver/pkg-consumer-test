@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
+    "@jvla/context-test-pkg": "^0.0.1",
+    "@jvla/mui-test-pkg": "^0.0.2",
     "core-js": "^3.6.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
