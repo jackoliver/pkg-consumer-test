@@ -1,0 +1,84 @@
+{
+  "name": "pkg-consumer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pkg-consumer/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/pkg-consumer",
+        "index": "apps/pkg-consumer/src/index.html",
+        "baseHref": "/",
+        "main": "apps/pkg-consumer/src/main.tsx",
+        "polyfills": "apps/pkg-consumer/src/polyfills.ts",
+        "tsConfig": "apps/pkg-consumer/tsconfig.app.json",
+        "assets": [
+          "apps/pkg-consumer/src/favicon.ico",
+          "apps/pkg-consumer/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/pkg-consumer/src/environments/environment.ts",
+              "with": "apps/pkg-consumer/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pkg-consumer:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pkg-consumer:build:development"
+        },
+        "production": {
+          "buildTarget": "pkg-consumer:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pkg-consumer/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/pkg-consumer"],
+      "options": {
+        "jestConfig": "apps/pkg-consumer/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
